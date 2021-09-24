@@ -1,3 +1,31 @@
+body {
+  background: lightskyblue;
+}
+ul {
+  display: grid;
+  
+}
+form {
+  color: pink;
+}
+.pokeform {
+  width: 30%;
+  color: brown;
+}
+.pokecontainer {
+  background: purple;
+  border: 5px solid blueviolet;
+  width: 50%;
+  padding: 5px;
+  margin: 5px;
+}
+.pokeimage {
+  height: 200px;
+  width: 200px;
+}
+p {
+  color: yellow;
+}
 .App {
   text-align: center;
 }

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import './App.css';
-import PokeList from './PokeList';
+import SearchPage from './SearchPage';
 
 export default class App extends Component {
   
@@ -10,7 +10,7 @@ export default class App extends Component {
   
   return (
 <>
-<PokeList />
+<SearchPage />
 </>
 
   );
