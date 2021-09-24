@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import request from 'superagent'
 import PokeItem from './PokeItem.js'
+import Loader from 'react-loader-spinner';
 
 export default class PokeList extends Component {
    
     state = {
         query: '',
         pokeArray: [],
-        sortOrder: 'asc'
+        sortOrder: 'asc',
+        isLoad: false,
     };
-    handleFormChange=(e)=> {
+
+
+   
+    handleFormChange=async(e)=> {
         e.preventDefault();
-        this.fetchSearch();
+        await this.fetchSearch();
     }
-    handleInputChange=(e) => {
+    handleInputChange=async(e) => {
         e.preventDefault();
         this.setState({query: e.target.value})
         
@@ -23,15 +28,15 @@ export default class PokeList extends Component {
     
     }
     componentDidMount = async () => {
-        const response = await request.get('https://pokedex-alchemy.herokuapp.com/api/pokedex')
-        console.log(response.body)
-        this.setState({allArray: response.body.results})
+        this.fetchSearch();
     }
     fetchSearch = async() => {
-        const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}`)
-        this.setState({pokeArray: response.body.results})
+        this.setState ({isLoad: true});
+        const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?perPage=100&pokemon=${this.state.query}&sort=pokemon&direction=${this.state.sortOrder}`)
+        this.setState({pokeArray: response.body.results, isLoad: false
+       })
     }
-   
+    
     
     
     render() {
@@ -50,7 +55,9 @@ export default class PokeList extends Component {
                    <option value='asc'>Ascending</option>
                    <option value='desc'>Descending</option>
                </select>
-                <PokeItem array={pokemonArray}/>
+               { this.state.isLoad 
+               ?<h1>Loading</h1> 
+               : <PokeItem array={pokemonArray}/>}
             </>
         )
     }
