@@ -6,7 +6,8 @@ export default class PokeList extends Component {
    
     state = {
         query: '',
-        pokeArray: []
+        pokeArray: [],
+        sortOrder: 'ascending'
     };
     handleFormChange=(e)=> {
         e.preventDefault();
@@ -15,6 +16,10 @@ export default class PokeList extends Component {
         e.preventDefault();
         this.setState({query: '?pokemon='+(e.target.value)})
         this.fetchSearch();
+    }
+    handleDropChange=(e)=> {
+    this.setState({sortOrder: e.target.value})
+    
     }
     componentDidMount = async () => {
         const response = await request.get('https://pokedex-alchemy.herokuapp.com/api/pokedex')
@@ -32,12 +37,18 @@ export default class PokeList extends Component {
         const pokemonArray = this.state.pokeArray
         console.log(pokemonArray);   
         console.log(this.state);
+
+        pokemonArray.filter(poke =>)
         return (
             <>
                <form onSubmit = {this.handleFormChange}>
                    <input onChange={this.handleInputChange}/>
                    <button>Submit</button>
                </form>
+               <select onChange={this.handleDropChange}>
+                   <option value='ascending'>Ascending</option>
+                   <option value='descending'>Descending</option>
+               </select>
                 <PokeItem array={pokemonArray}/>
             </>
         )
