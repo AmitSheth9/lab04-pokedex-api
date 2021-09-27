@@ -3,11 +3,11 @@ import PokeItem from './PokeItem'
 export default class PokeList extends Component {
     render() {
         return (
-            <div>
+            <ul>
                 {this.props.array.map(item =>
                   { return <PokeItem key={item.id} {...item}/>}
                 )}
-            </div>
+            </ul>
         )
     }
 }
