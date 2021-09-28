@@ -40,16 +40,18 @@ export default class SearchPage extends Component {
     }
     handlePrev = async(e) =>{
         await this.setState({currentPage: this.state.currentPage-1})
+        await this.fetchSearch()
     }
     handleNext = async(e) => {
         await this.setState({currentPage: this.state.currentPage+1})
+        await this.fetchSearch()
     }
     componentDidMount = async () => {
         await this.fetchSearch();
     }
     fetchSearch = async() => {
         this.setState ({isLoad: true});
-        const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sort}&direction=${this.state.sortOrder}&perPage=20&page=${this.state.currentPage}`)
+        const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sort}&direction=${this.state.sortOrder}&perPage=50&page=${this.state.currentPage}`)
         this.setState({pokeArray: response.body.results, isLoad: false
        })
     }
