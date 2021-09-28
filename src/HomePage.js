@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default class HomePage extends Component {
     render() {
@@ -8,13 +8,13 @@ export default class HomePage extends Component {
                 Welcome to the pokedex
 
                 <li>
-                    <Link to='/'>Home Page</Link>
+                    <NavLink activeStyle={{color: 'red'}}to='/'>Home Page</NavLink>
                 </li>
                 <li>
-                    <Link to='/pokemon'>Search Page</Link>
+                    <NavLink activeStyle={{color: 'red'}}to='/pokemon'>Search Page</NavLink>
                 </li>
                 <li>
-                    <Link to='/pokemon/'>Details Page</Link>
+                    <NavLink to='/pokemon/'>Details Page</NavLink>
                 </li>
             </div>
         )

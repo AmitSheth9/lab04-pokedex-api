@@ -51,7 +51,7 @@ export default class SearchPage extends Component {
     }
     fetchSearch = async() => {
         this.setState ({isLoad: true});
-        const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sort}&direction=${this.state.sortOrder}&perPage=50&page=${this.state.currentPage}`)
+        const response = await request.get(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${this.state.query}&sort=${this.state.sort}&direction=${this.state.sortOrder}&perPage=20&page=${this.state.currentPage}`)
         this.setState({pokeArray: response.body.results, isLoad: false
        })
     }
@@ -72,13 +72,13 @@ export default class SearchPage extends Component {
                
                     <button>Submit</button>
                </form>
-               <button onClick={this.handleReset}>Reset</button>
+                <button onClick={this.handleReset}>Reset</button> 
                </div>
-               <button onClick={this.handlePrev}>Prev</button>
+               {this.state.currentPage !== 1 && <button onClick={this.handlePrev}>Prev</button>}
                <span>Current page: {this.state.currentPage}</span>
-               <button onClick={this.handleNext}>Next</button>
+               {this.state.pokeArray.length === 20 && <button onClick={this.handleNext}>Next</button> }
                { this.state.isLoad 
-               ?<h1>Loading</h1> 
+               ?<img src='spinner.gif' alt=''/>
                : <PokeList array={this.state.pokeArray}/>}
             
             </>
